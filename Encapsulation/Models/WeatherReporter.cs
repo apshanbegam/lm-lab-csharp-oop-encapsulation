@@ -3,58 +3,39 @@ namespace Encapsulation.Models
 {
     public class WeatherReporter
     {
-        public string Location;
-        public double Temperature;
+        private string _location;
+        private double _temperatureInCelsius;
 
-        public WeatherReporter(string location, double temperature)
+        public WeatherReporter(string location, double temperatureInCelsius)
         {
-            Location = location;
-            Temperature = temperature;
+            _location = location;
+            _temperatureInCelsius = temperatureInCelsius;
         }
 
-        public string Print()
+        public string PrintWeatherReport()
         {
-            double newTemp = (9.0 / 5.0) * Temperature + 32;
-            return $"I am in {Location} and it is {Check1()}. {Check2()}. The temperature in Fahrenheit is {newTemp}.";
+            
+            return $"I am in {_location} and it is {Icon()}. {Weather()}. The temperature in Fahrenheit is {TempInFahrenheit()}.";
         }
 
-        public string Check1()
+        private double TempInFahrenheit()
         {
-            if (Location == "London")
-            {
+            double Fahrenheit = (9.0 / 5.0) * _temperatureInCelsius + 32;
+            return Fahrenheit;
+        }
 
-                return "🌦";
-
-            }
-            else if (Location == "California")
-            {
-
-                return "🌅";
-
-            }
-            else if (Location == "Cape Town")
-            {
-
-                return "🌤";
-
-            }
+        private string Icon()
+        {
+            if (_location == "London") return "🌦";
+            else if (_location == "California") return "🌅";
+            else if (_location == "Cape Town") return "🌤";
             return "🔆";
         }
 
-        public string Check2()
+        private string Weather()
         {
-            if (Temperature > 30)
-            {
-
-                return "It's too hot 🥵!";
-
-            }
-            else if (Temperature < 10)
-            {
-
-                return "It's too cold 🥶!";
-
-            }
+            if (_temperatureInCelsius > 30) return "It's too hot 🥵!";
+            else if (_temperatureInCelsius < 10) return "It's too cold 🥶!";
             return "Ahhh...it's just right 😊!";
         }
 
